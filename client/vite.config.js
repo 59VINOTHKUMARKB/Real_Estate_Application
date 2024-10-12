@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   proxy:{
     server:{
-      "target":"https://vino-estate-client.vercel.app",
+      "target":"https://vino-estate-api.vercel.app",
       "changeOrigin":"true",
       "secure": true
     }
