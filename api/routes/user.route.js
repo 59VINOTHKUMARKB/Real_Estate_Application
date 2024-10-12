@@ -16,4 +16,5 @@ router.get("/savedstatus",verifyToken,getsavedStatus);
 router.get("/profileposts",verifyToken,profilePosts)
 
 router.get("/notification",verifyToken,getNotificationNumber);
+
 export default router;

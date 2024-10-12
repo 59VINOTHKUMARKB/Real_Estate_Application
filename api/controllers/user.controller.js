@@ -129,20 +129,25 @@ export const savePost = async (req, res) => {
 export const profilePosts = async(req,res)=>
 {
     const tokenUserId=req.userId;
+    console.log(tokenUserId)
     try{
         const userPosts =await prisma.post.findMany(
             {
                 where:{ userId:tokenUserId }
             }
         );
+        console.log(userPosts);
+        
         const saved = await prisma.savedPost.findMany({
-            where:{ userId:tokenUserId },
+            where:{ userId:tokenUserId},
             include:{
                 post:true
             }
         })
-        const savedPosts = saved.map(item=>item.post)
-    res.status(200).json({userPosts,savedPosts});
+        console.log(saved);
+        
+        const savedPosts = saved.length > 0 ? saved.map(item => item.post) : [];
+        res.status(200).json({userPosts,savedPosts});
     }
     catch(err){
         console.log(err);

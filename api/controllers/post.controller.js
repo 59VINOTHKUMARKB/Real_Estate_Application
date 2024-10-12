@@ -5,26 +5,35 @@ export const getPosts = async (req, res) => {
     console.log("Query Parameters:", query);
 
     try {
-        // Prepare the filters
         const filters = {
-            city: query.city ? query.city.trim() : undefined,
-            type: query.type || "rent",
-            property: query.property || "house",
-            bedroom: query.bedroom ? {
+            city: query.city && query.city !== "any" ? query.city.trim() : undefined,
+            type: query.type && query.type !== "any" ? query.type : undefined,
+            property: query.property && query.property !== "any" ? query.property : undefined,
+            bedroom: query.bedroom && parseInt(query.bedroom, 10) === 0 ? {
+                gte:1
+            } : query.bedroom ? {
                 gte: parseInt(query.bedroom, 10),
                 lte: parseInt(query.bedroom, 10)
             } : undefined,
-            price: {}
+            bathroom: query.bathroom && parseInt(query.bathroom, 10) === 0 ? {
+                gte: 1
+            } : query.bathroom ? {
+                gte: parseInt(query.bathroom, 10),
+                lte: parseInt(query.bathroom, 10)
+        } :  undefined,
+            price: {} 
         };
-
-        // Handle minPrice and maxPrice
+        
+        
+        console.log(filters);
+        
         if (query.minPrice) {
             const minPrice = parseInt(query.minPrice, 10);
             if (!isNaN(minPrice) && minPrice >= 0) {
                 filters.price.gte = minPrice;
             }
         } else {
-            filters.price.gte = 0; // Default minimum price
+            filters.price.gte = 0;
         }
 
         if (query.maxPrice) {
@@ -32,20 +41,20 @@ export const getPosts = async (req, res) => {
             if (!isNaN(maxPrice) && maxPrice > 0) {
                 filters.price.lte = maxPrice;
             } else {
-                filters.price.lte = 10000000; // Default maximum price
+                filters.price.lte = 10000000;
             }
         } else {
-            filters.price.lte = 10000000; // Default maximum price
+            filters.price.lte = 10000000;
         }
 
-        // Remove undefined properties from filters
-        Object.keys(filters).forEach(key => 
-            filters[key] === undefined && delete filters[key]
-        );
+        Object.keys(filters).forEach(key => {
+            if (filters[key] === undefined || (typeof filters[key] === 'object' && Object.keys(filters[key]).length === 0)) {
+                delete filters[key];
+            }
+        });
 
-        console.log("Filters:", filters);
+        console.log("Final Filters:", filters);
 
-        // Fetch posts from the database
         const posts = await prisma.post.findMany({
             where: filters
         });
@@ -57,6 +66,7 @@ export const getPosts = async (req, res) => {
         res.status(500).json({ message: "Failed to get Posts!" });
     }
 };
+
 
 export const getPost = async (req, res) => {
     const id = req.params.id;
