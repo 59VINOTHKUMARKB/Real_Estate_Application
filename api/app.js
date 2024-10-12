@@ -24,6 +24,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
 app.use("/api/testing",(req,res)=>{
+    console.log("I am Called");
     res.json({message:"API is working fine"});
 })
 app.use("/api/users", userRoute);
