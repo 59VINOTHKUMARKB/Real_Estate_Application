@@ -1,0 +1,100 @@
+@import '../../responsive.scss';
+.profilePage{
+    display: flex;
+    height: 100%;
+    margin-bottom: 100px;
+
+    @include md{
+        flex-direction: column;
+        overflow: scroll;
+    }
+    .details{
+        flex:3 ;
+        overflow-y: scroll;
+
+        @include md{
+            flex: none;
+            height: max-content;
+        }
+        .wrapper{
+            padding-right: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-bottom: 70px;
+
+            .title{
+                display: flex;
+                align-items: center;
+                justify-content: space-between  ;
+                button{
+                    padding: 10px 24px;
+                    background-color: yellow;
+                    cursor: pointer;
+                    border: none;
+                    font-weight: 600;
+                }
+                .messageicon{
+                    display: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 10px;
+                    padding-left: 10px;
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                
+                    @include sm{
+                        display: block;
+                    }
+                }
+            }
+            .info{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    margin-top: 0px;
+                    span{
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                    }
+
+                    button{
+                        width: 100px;
+                        background-color: teal;
+                        border: none;
+                        color: white;
+                        padding: 10px;
+                        cursor: pointer;
+                    }
+                    
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50px; 
+                        object-fit: cover;
+                        
+                    }
+            }
+        }
+    }
+    .chatContainer{
+        margin-left: 20px;
+        flex: 2;
+        background-color: #f5ecea;
+        border-radius: 10px;
+        padding: 10px;
+        height: 100%;
+
+        @include md{
+            flex: none;
+            height: max-content;
+        }
+        .wrapper{
+            padding: 0px 20px;
+            height: 100%;
+        }
+    }
+}
