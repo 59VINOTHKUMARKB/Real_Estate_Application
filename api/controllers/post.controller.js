@@ -90,7 +90,7 @@ export const getPost = async (req, res) => {
 
         if(token)
         {
-            jwt.verify(token,cdbyuilaheu1skue7nd2hduAsD=,async(err,payload)=>{
+            jwt.verify(token,process.env.JWT_SECRET_KEY,async(err,payload)=>{
                 if(!err)
                 {
                     const saved = await prisma.savedPost.findUnique({
