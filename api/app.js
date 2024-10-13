@@ -23,16 +23,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
-app.use("/api/testing",(req,res)=>{
+app.use("/api/testing", (req, res) => {
     console.log("I am Called");
-    res.json({message:"API is working fine"});
-})
+    res.json({ message: "API is working fine" });
+});
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/test", testRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
-app.listen(8800, () => {
-    console.log('server is running on port 8800');
-});
+export default app;

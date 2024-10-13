@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "frontend": "cd client/react-estate-ui && npm run dev",
-    "backend": "cd api && npm run dev"
+    "dev": "vercel dev",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
