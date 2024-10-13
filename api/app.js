@@ -23,10 +23,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
-app.use("/api/testing", (res) => {
+app.get("/api/testing", (res) => {
     console.log("I am Called");
     res.json({ message: "API is working fine" });
 });
+
+app.get('/',(req,res)=>{
+    res.send('API is running...');
+})
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/test", testRoute);
