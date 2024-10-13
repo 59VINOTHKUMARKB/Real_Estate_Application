@@ -2,17 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/app.js",
-      "use": "@vercel/node",
-      "config": {
-        "installCommand": "npm install && prisma generate"
-      }
+      "src": "app.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)", 
-      "dest": "/api/app.js"
+      "src": "/api/(.*)",
+      "dest": "/app.js"
     }
   ]
 }
