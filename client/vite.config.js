@@ -6,7 +6,7 @@ export default defineConfig({
   proxy:{
     server:{
       "target":"https://vino-estate-api.vercel.app",
-      "changeOrigin":"true",
+      "changeOrigin":true,
       "secure": true
     }
   }

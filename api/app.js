@@ -22,12 +22,16 @@ app.options('*', cors());
 app.use(express.json());
 app.use(cookieParser());
 
+
 app.use("/api/auth", authRoute);
+
+//testing
 app.use("/testing", (req,res) => {
     console.log("I am Called");
     res.json({ message: "API is working fine" });
 });
 
+//testing
 app.get('/',(req,res)=>{
     res.send('API is running...');
 })
