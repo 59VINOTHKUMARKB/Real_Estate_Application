@@ -11,13 +11,18 @@ import messageRoute from './routes/message.route.js';
 const app = express();
 
 app.use(cors({
-    origin: 'https://vino-estate-client.vercel.app',
-    methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"]
+    origin: '*',
+    methods: ["POST", "PUT", "GET", "DELETE"],
+    credentials: true
 }));
 
-app.options('*', cors());
+
+
+app.options('*', cors({
+    origin: '*',
+    methods: ["POST", "PUT", "GET", "DELETE"],
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
